@@ -5,8 +5,8 @@ import random
 
 class Population:
     target = ""
-    mutationRate = None
-    popMax = None
+    mutationRate = 0
+    popMax = 0
 
     finishedEvolving = False
     generations = 0
@@ -16,10 +16,11 @@ class Population:
 
     closestString = ""
 
-    def _init_(self, _target, _mutationrate, _popmax):
+    def __init__(self, _target, _mutationrate, _popmax):
         self.target = _target
         self.mutationRate = _mutationrate
         self.popMax = _popmax
+
         for i in range(0, self.popMax):
             self.population[i] = DNA.DNA(len(self.target))
 
@@ -36,9 +37,12 @@ class Population:
             if self.population[i].getFitness() > maxfitness:
                 maxfitness = self.population[i].getFitness()
                 self.closestString = "".join(self.population[i].genes)
+
             currentfitness = (100 * round(Decimal(self.population[i].getFitness()), 2))
+
             for j in range(index, (index + currentfitness)):
                 self.genePool[j] = i
+
             index += currentfitness
 
 
@@ -53,6 +57,7 @@ class Population:
 
             child = parent0.crossover(parent1)
             self.population[i] = child
+
         self.generations += 1
 
 

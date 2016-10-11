@@ -9,7 +9,7 @@ class DNA:
 
     genes = []
 
-    def _init_(self, _genecount):
+    def __init__(self, _genecount):
         self.geneCount = _genecount
         for i in range(0, self.geneCount):
             self.genes[i] = random.choice(string.ascii_letters)
