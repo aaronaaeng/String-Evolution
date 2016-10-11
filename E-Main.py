@@ -2,7 +2,7 @@ import Population
 
 
 def main():
-    target = "To be or not to be"
+    target = "Hello"
     mutationRate = .03
     popMax = 10
 
@@ -14,6 +14,7 @@ def main():
 def draw(population):
     finished = False
     while not finished:
+
         population.calcFitness()
 
         population.naturalSelection()
@@ -22,7 +23,7 @@ def draw(population):
 
         finished = population.evaluate()
 
-    for i in range(0, len(population.population)):
-        print("".join(population.population[i].genes))
+    #for i in range(0, len(population.population)):
+        #print("".join(population.population[i].genes))
 
 main()

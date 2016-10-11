@@ -12,7 +12,9 @@ class DNA:
     def __init__(self, _genecount):
         self.geneCount = _genecount
         for i in range(0, self.geneCount):
-            self.genes[i] = random.choice(string.ascii_letters)
+            self.genes.append(random.choice(string.ascii_letters))
+
+        print(len(self.genes))
 
     def similar(self, a, b):
         return SequenceMatcher(None, a, b).ratio()
@@ -28,9 +30,9 @@ class DNA:
         midpoint = random.randint(0, self.geneCount)
         for i in range(0, self.geneCount):
             if i > midpoint:
-                child.genes[i] = self.genes[i]
+                child.genes.append(self.genes[i])
             else:
-                child.genes[i] = parent1.genes[i]
+                child.genes.append(parent1.genes[i])
         return child
 
     def mutate(self, rate):

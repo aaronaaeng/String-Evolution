@@ -7,6 +7,7 @@ class Population:
     target = ""
     mutationRate = 0
     popMax = 0
+    length = None
 
     finishedEvolving = False
     generations = 0
@@ -20,14 +21,15 @@ class Population:
         self.target = _target
         self.mutationRate = _mutationrate
         self.popMax = _popmax
+        self.length = len(_target)
 
         for i in range(0, self.popMax):
-            self.population[i] = DNA.DNA(len(self.target))
+            self.population.append(DNA.DNA(self.length))
 
 
     def calcFitness(self):
         for i in range(0, self.popMax):
-            self.population[i].calcFitness()
+            self.population[i].calcFitness(self.target)
 
 
     def naturalSelection(self):
@@ -39,18 +41,19 @@ class Population:
                 self.closestString = "".join(self.population[i].genes)
 
             currentfitness = (100 * round(Decimal(self.population[i].getFitness()), 2))
+            currentfitness = int(currentfitness)
 
             for j in range(index, (index + currentfitness)):
-                self.genePool[j] = i
+                self.genePool.append(i)
 
             index += currentfitness
 
 
     def generate(self):
         for i in range(0, self.popMax):
-            poolsize = len(self.genePool)
-            index0 = random.randint(0, poolsize)
-            index1 = random.randint(0, poolsize)
+            #poolsize = len(self.genePool)
+            index0 = random.choice(self.genePool)
+            index1 = random.choice(self.genePool)
 
             parent0 = self.population[index0]
             parent1 = self.population[index1]
@@ -59,9 +62,12 @@ class Population:
             self.population[i] = child
 
         self.generations += 1
+        print(self.generations)
+        self.genePool = []
 
 
     def evaluate(self):
+        print(self.closestString)
         if self.closestString == self.target:
             return True
         else:
