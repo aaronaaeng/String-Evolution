@@ -18,7 +18,7 @@ class DNA:
         return SequenceMatcher(None, a, b).ratio()
 
     def calcFitness(self, target):
-        self.fitness = self.similar(self.genes, target)
+        self.fitness = self.similar("".join(self.genes), target)
 
 
     def getFitness(self):

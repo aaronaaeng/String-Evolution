@@ -1,8 +1,9 @@
 import DNA
+from decimal import Decimal
 
 
 class Population:
-    target = None
+    target = ""
     mutationRate = None
     popMax = None
 
@@ -22,17 +23,22 @@ class Population:
             self.population[i] = DNA.DNA(len(self.target))
 
 
-   # def calcFitness(self):
+    #def calcFitness(self):
 
 
     def naturalSelection(self):
         maxfitness = 0
-        for i in range (0, len(self.population)):
+        index = 0
+        for i in range(0, len(self.population)):
             if self.population[i].getFitness() > maxfitness:
                 maxfitness = self.population[i].getFitness()
+        for j in range(0, self.popMax):
+            currentfitness = (100 * round(Decimal(self.population[j].getFitness()), 2))
+            for k in range(index, (index + currentfitness)):
+                self.genePool[k] = j
+            index += currentfitness
+
+    #def generate(self):
 
 
-   # def generate(self):
-
-
-  #  def evaluate(self):
+    #def evaluate(self):
