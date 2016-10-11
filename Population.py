@@ -1,5 +1,6 @@
 import DNA
 from decimal import Decimal
+import random
 
 
 class Population:
@@ -23,22 +24,40 @@ class Population:
             self.population[i] = DNA.DNA(len(self.target))
 
 
-    #def calcFitness(self):
+    def calcFitness(self):
+        for i in range(0, self.popMax):
+            self.population[i].calcFitness()
 
 
     def naturalSelection(self):
         maxfitness = 0
         index = 0
-        for i in range(0, len(self.population)):
+        for i in range(0, self.popMax):
             if self.population[i].getFitness() > maxfitness:
                 maxfitness = self.population[i].getFitness()
-        for j in range(0, self.popMax):
-            currentfitness = (100 * round(Decimal(self.population[j].getFitness()), 2))
-            for k in range(index, (index + currentfitness)):
-                self.genePool[k] = j
+                self.closestString = "".join(self.population[i].genes)
+            currentfitness = (100 * round(Decimal(self.population[i].getFitness()), 2))
+            for j in range(index, (index + currentfitness)):
+                self.genePool[j] = i
             index += currentfitness
 
-    #def generate(self):
+
+    def generate(self):
+        for i in range(0, self.popMax):
+            poolsize = len(self.genePool)
+            index0 = random.randint(0, poolsize)
+            index1 = random.randint(0, poolsize)
+
+            parent0 = self.population[index0]
+            parent1 = self.population[index1]
+
+            child = parent0.crossover(parent1)
+            self.population[i] = child
+        self.generations += 1
 
 
-    #def evaluate(self):
+    def evaluate(self):
+        if self.closestString == self.target:
+            return True
+        else:
+            return False
