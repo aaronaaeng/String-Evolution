@@ -26,6 +26,8 @@ class Population:
         for i in range(0, self.popMax):
             self.population.append(DNA.DNA(self.length))
 
+            for j in range(0, i):
+                print("".join(self.population[j].genes))
 
     def calcFitness(self):
         for i in range(0, self.popMax):
@@ -42,6 +44,8 @@ class Population:
 
             currentfitness = (100 * round(Decimal(self.population[i].getFitness()), 2))
             currentfitness = int(currentfitness)
+
+            print("".join(self.population[i].genes))
 
             for j in range(index, (index + currentfitness)):
                 self.genePool.append(i)
