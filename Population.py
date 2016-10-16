@@ -5,7 +5,7 @@ import random
 
 class Population:
     target = ""
-    mutationRate = 0
+    mutationRate = 1
     popMax = 0
     length = None
 
@@ -65,6 +65,7 @@ class Population:
 
             child = parent0.crossover(parent1)
             self.population[i] = child
+            self.population[i] = child.mutate(self.mutationRate)
 
         self.generations += 1
         print(self.generations)

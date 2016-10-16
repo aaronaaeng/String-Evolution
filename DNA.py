@@ -34,9 +34,9 @@ class DNA:
         midpoint = random.randint(0, self.geneCount)
         for i in range(0, self.geneCount):
             if i > midpoint:
-                child.genes.append(self.genes[i])
+                child.genes[i] = self.genes[i]
             else:
-                child.genes.append(parent1.genes[i])
+                child.genes[i] = self.genes[i]
         print("".join(child.genes))
         return child
 
