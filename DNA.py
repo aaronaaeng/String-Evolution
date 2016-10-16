@@ -13,8 +13,8 @@ class DNA:
         self.geneCount = _genecount
         self.genes = [None] * self.geneCount
 
-        print("length:", len(self.genes))
-        print("genecount:", self.geneCount)
+#        print("length:", len(self.genes))
+#        print("genecount:", self.geneCount)
 
     def randomize(self):
         for i in range(0, self.geneCount):
@@ -42,5 +42,5 @@ class DNA:
 
     def mutate(self, rate):
         for i in range(0, self.geneCount):
-            if (random.randint(0, 100) / 100.0) < rate:
+            if random.randint(0, 100) < rate:
                 self.genes[i] = random.choice(string.ascii_letters)

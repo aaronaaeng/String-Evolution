@@ -5,7 +5,7 @@ import random
 
 class Population:
     target = ""
-    mutationRate = 1
+    mutationRate = 5
     popMax = 0
     length = None
 
@@ -43,10 +43,9 @@ class Population:
                 maxfitness = self.population[i].getFitness()
                 self.closestString = "".join(self.population[i].genes)
 
-            currentfitness = (100 * round(Decimal(self.population[i].getFitness()), 2))
-            currentfitness = int(currentfitness)
+            currentfitness = int(100 * round(Decimal(self.population[i].getFitness()), 2))
 
-            print("".join(self.population[i].genes))
+#            print("".join(self.population[i].genes))
 
             for j in range(index, (index + currentfitness)):
                 self.genePool.append(i)
@@ -65,12 +64,11 @@ class Population:
 
             child = parent0.crossover(parent1)
             self.population[i] = child
-            self.population[i] = child.mutate(self.mutationRate)
+            self.population[i].mutate(self.mutationRate)
 
         self.generations += 1
         print(self.generations)
-        self.genePool = []
-
+        self.genePool = [0]
 
     def evaluate(self):
         print(self.closestString)

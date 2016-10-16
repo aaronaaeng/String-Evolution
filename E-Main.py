@@ -3,8 +3,8 @@ import Population
 
 def main():
     target = "Hello"
-    mutationRate = .03
-    popMax = 10
+    mutationRate = 3
+    popMax = 100
 
     population = Population.Population(target, mutationRate, popMax)
 
