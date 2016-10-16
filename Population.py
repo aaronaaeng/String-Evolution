@@ -25,9 +25,10 @@ class Population:
 
         for i in range(0, self.popMax):
             self.population.append(DNA.DNA(self.length))
+            self.population[i].randomize()
 
-            for j in range(0, i):
-                print("".join(self.population[j].genes))
+        for j in range(0, self.popMax):
+            print("".join(self.population[j].genes))
 
     def calcFitness(self):
         for i in range(0, self.popMax):
