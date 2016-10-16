@@ -37,7 +37,7 @@ class DNA:
                 child.genes[i] = self.genes[i]
             else:
                 child.genes[i] = self.genes[i]
-        print("".join(child.genes))
+#        print("".join(child.genes))
         return child
 
     def mutate(self, rate):

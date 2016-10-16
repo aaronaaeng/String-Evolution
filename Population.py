@@ -5,8 +5,8 @@ import random
 
 class Population:
     target = ""
-    mutationRate = 5
-    popMax = 0
+    mutationRate = None
+    popMax = None
     length = None
 
     finishedEvolving = False
@@ -27,8 +27,8 @@ class Population:
             self.population.append(DNA.DNA(self.length))
             self.population[i].randomize()
 
-        for j in range(0, self.popMax):
-            print("".join(self.population[j].genes))
+#        for j in range(0, self.popMax):
+#            print("".join(self.population[j].genes))
 
     def calcFitness(self):
         for i in range(0, self.popMax):
@@ -65,6 +65,7 @@ class Population:
             child = parent0.crossover(parent1)
             self.population[i] = child
             self.population[i].mutate(self.mutationRate)
+            print("".join(self.population[i].genes))
 
         self.generations += 1
         print(self.generations)
