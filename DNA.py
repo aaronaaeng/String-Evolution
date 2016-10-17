@@ -13,9 +13,6 @@ class DNA:
         self.geneCount = _genecount
         self.genes = [None] * self.geneCount
 
-#        print("length:", len(self.genes))
-#        print("genecount:", self.geneCount)
-
     def randomize(self):
         for i in range(0, self.geneCount):
             self.genes[i] = random.choice(string.ascii_letters)
@@ -36,8 +33,7 @@ class DNA:
             if i > midpoint:
                 child.genes[i] = self.genes[i]
             else:
-                child.genes[i] = self.genes[i]
-#        print("".join(child.genes))
+                child.genes[i] = parent1.genes[i]
         return child
 
     def mutate(self, rate):

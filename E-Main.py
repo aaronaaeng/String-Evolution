@@ -23,7 +23,5 @@ def draw(population):
 
         finished = population.evaluate()
 
-    #for i in range(0, len(population.population)):
-        #print("".join(population.population[i].genes))
 
 main()

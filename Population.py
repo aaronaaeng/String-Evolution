@@ -27,13 +27,10 @@ class Population:
             self.population.append(DNA.DNA(self.length))
             self.population[i].randomize()
 
-#        for j in range(0, self.popMax):
-#            print("".join(self.population[j].genes))
 
     def calcFitness(self):
         for i in range(0, self.popMax):
             self.population[i].calcFitness(self.target)
-
 
     def naturalSelection(self):
         maxfitness = 0
@@ -45,17 +42,13 @@ class Population:
 
             currentfitness = int(100 * round(Decimal(self.population[i].getFitness()), 2))
 
-#            print("".join(self.population[i].genes))
-
             for j in range(index, (index + currentfitness)):
                 self.genePool.append(i)
 
             index += currentfitness
 
-
     def generate(self):
         for i in range(0, self.popMax):
-            #poolsize = len(self.genePool)
             index0 = random.choice(self.genePool)
             index1 = random.choice(self.genePool)
 
