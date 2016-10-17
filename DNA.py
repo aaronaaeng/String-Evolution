@@ -1,6 +1,5 @@
 import string
 import random
-from difflib import SequenceMatcher
 
 
 class DNA:
