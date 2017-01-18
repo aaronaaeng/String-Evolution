@@ -4,69 +4,68 @@ import random
 
 
 class Population:
-    target = ""
-    mutationRate = None
-    popMax = None
-    length = None
+    Target = ""
+    MutationRate = None
+    PopMax = None
+    Length = None
 
-    finishedEvolving = False
-    generations = 0
+    FinishedEvolving = False
+    Generations = 0
 
-    population = []
-    genePool = []
+    Population = []
+    GenePool = []
 
-    closestString = ""
+    ClosestString = ""
 
     def __init__(self, _target, _mutationrate, _popmax):
-        self.target = _target
-        self.mutationRate = _mutationrate
-        self.popMax = _popmax
-        self.length = len(_target)
+        self.Target = _target
+        self.MutationRate = _mutationrate
+        self.PopMax = _popmax
+        self.Length = len(_target)
 
-        for i in range(0, self.popMax):
-            self.population.append(DNA.DNA(self.length))
-            self.population[i].randomize()
+        for i in range(0, self.PopMax):
+            self.Population.append(DNA.DNA(self.Length))
+            self.Population[i].randomize()
 
+    def calc_population_fitness(self):
+        for i in range(0, self.PopMax):
+            self.Population[i].calc_personal_fitness(self.Target)
 
-    def calcFitness(self):
-        for i in range(0, self.popMax):
-            self.population[i].calcFitness(self.target)
-
-    def naturalSelection(self):
-        maxfitness = 0
+    def create_gene_pool(self):
+        max_fitness = 0
         index = 0
-        for i in range(0, self.popMax):
-            if self.population[i].getFitness() > maxfitness:
-                maxfitness = self.population[i].getFitness()
-                self.closestString = "".join(self.population[i].genes)
+        for i in range(0, self.PopMax):
+            if self.Population[i].get_fitness() > max_fitness:
+                max_fitness = self.Population[i].get_fitness()
+                self.ClosestString = "".join(self.Population[i].Genes)
 
-            currentfitness = int(100 * round(Decimal(self.population[i].getFitness()), 2))
+            current_fitness = int(100 * round(Decimal(self.Population[i].get_fitness()), 2))
 
-            for j in range(index, (index + currentfitness)):
-                self.genePool.append(i)
+            for j in range(index, (index + current_fitness)):
+                self.GenePool.append(i)
 
-            index += currentfitness
+            index += current_fitness
 
-    def generate(self):
-        for i in range(0, self.popMax):
-            index0 = random.choice(self.genePool)
-            index1 = random.choice(self.genePool)
+    def create_generation(self):
+        for i in range(0, self.PopMax):
+            first_index = random.choice(self.GenePool)
+            second_index = random.choice(self.GenePool)
 
-            parent0 = self.population[index0]
-            parent1 = self.population[index1]
+            first_parent = self.Population[first_index]
+            second_parent = self.Population[second_index]
 
-            child = parent0.crossover(parent1)
-            self.population[i] = child
-            self.population[i].mutate(self.mutationRate)
-            print("".join(self.population[i].genes))
+            child = first_parent.crossover(second_parent)
+            self.Population[i] = child
+            self.Population[i].mutate(self.MutationRate)
+            print("".join(self.Population[i].Genes))
 
-        self.generations += 1
-        print(self.generations)
-        self.genePool = [0]
+        self.Generations += 1
+        print(self.Generations)
+        self.GenePool = [0]
 
     def evaluate(self):
-        print(self.closestString)
-        if self.closestString == self.target:
+        print(self.ClosestString)
+        if self.ClosestString == self.Target:
             return True
         else:
             return False

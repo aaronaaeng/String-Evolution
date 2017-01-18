@@ -2,26 +2,18 @@ import Population
 
 
 def main():
-    target = "Hello"
-    mutationRate = 3
-    popMax = 100
-
-    population = Population.Population(target, mutationRate, popMax)
-
-    draw(population)
-
-
-def draw(population):
+    target = input("Enter target string: ")
+    pop_max = int(input("Enter population size: "))
+    mutation_rate = int(input("Enter mutation rate: "))
     finished = False
+
+    population = Population.Population(target, mutation_rate, pop_max)
+
     while not finished:
-
-        population.calcFitness()
-
-        population.naturalSelection()
-
-        population.generate()
-
+        population.calc_population_fitness()
+        population.create_gene_pool()
+        population.create_generation()
         finished = population.evaluate()
 
-
-main()
+if __name__ == '__main__':
+    main()
